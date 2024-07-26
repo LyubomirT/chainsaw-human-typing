@@ -1,30 +1,30 @@
 # chainsaw-human-typing
 
-Welcome to the chainsaw-human-typing repository! Chainsaw Human Typing is a tool that allows you to simulate human typing on a keyboard if you can't, or don't want to, paste directly. This is useful for simulating human typing in a video, for example.
+⌨️ Chainsaw Human Typing 是一个允许你在键盘上模拟人类打字的工具，如果你不想或不能直接粘贴 ，这对于模拟人类在视频中打字很有用
 
-## Getting Started 🚀
+## 快速上手 🚀
 
-Simply download one a binary from the [releases](https://github.com/LyubomirT/chainsaw-human-typing/releases) page and run it. You can also build it yourself by cloning the repository and running `python main.py`.
+简单！从这个release页面里下载 [releases](https://github.com/LyubomirT/chainsaw-human-typing/releases) 然后运行即可. 你也可以通过克隆git仓库和运行 `python main.py`自行构建
 
-## Usage 🛠
+## 用法 🛠
 
-It's ️quite easy to use, actually! Just type the text you want to simulate typing in the input field and press the "Start Typing" button. The text will be typed out in the input field below. You can see the progress in the progress bar.
+其实很简单的, 实际上! 只需要把你想模拟打字的文字输入进“输入”框然后点 "开始打字" 按钮. 文字会直接输出在输出框里. 你可以进度条内看到进度
 
-## Run from Source 🏗
+## 从源文件运行 🏗
 
-To run the project from source, you need to have Python 3.6 or higher installed. You also must install the dependencies by running `pip install -r requirements.txt`. After that, you can run the project by running `python main.py`.
+要从源文件运行, 你需要安装 Python 3.6 或更高版本. 你还需要通过运行 `pip install -r requirements.txt`安装依赖。 之后，你可以通过运行 `python main.py`来运行
 
-To build the project, you can use PyInstaller. `build.ps1` is a PowerShell script that builds the project using PyInstaller. You can run it by running `.\build.ps1`. The output will be in the `dist` folder, note that the script is configured to build a Windows executable and that you need to have PyInstaller installed.
+要构建项目，你可以使用PyInstaller， `build.ps1` 是一个通过PyInstaller构建项目的PowerShell脚本。 你可以用如下命令运行脚本： `.\build.ps1`. 输出会在 `dist` 文件夹, 注意脚本会构建Windows可执行文件【.exe】且依赖PyInstaller
 
-## Contributing 🤝
+## 贡献 🤝
 
-If you want to contribute to this project, feel free to fork it and submit a pull request. I'll be happy to review it! If you have any questions, feel free to open an issue. Please check the [CONTRIBUTING](CONTRIBUTING.md) file for more information.
+如果你想为项目做贡献, 大方的fork它然后提交pr. 我会很高兴去审阅的! 如果你有任何疑问, 大方的提交一个issue。 请查看 [CONTRIBUTING](CONTRIBUTING.md) 文件获得更多内容
 
-## License 📝
+## 执照 📝
 
-This project is licensed under the GPL-3.0 License - see the [LICENSE](LICENSE) file for details.
+此项目遵从GPL-3.0 执照 - 查看 [LICENSE](LICENSE) 文件获得更多细节.
 
-## Acknowledgements 🙏
+## 基于 🙏
 
 - [PyQt5](https://pypi.org/project/PyQt5/)
 - [PyInstaller](https://pypi.org/project/pyinstaller/)
