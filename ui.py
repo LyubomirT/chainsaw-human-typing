@@ -1,9 +1,14 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
+import ctypes
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(600, 400)
+        MainWindow.setMinimumSize(QtCore.QSize(600, 400))
+        MainWindow.setMaximumSize(QtCore.QSize(600, 400))
+        MainWindow.setWindowIcon(QtGui.QIcon("logo.png"))
+        ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID("Chainsaw Human Typing")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         
@@ -77,7 +82,7 @@ class Ui_MainWindow(object):
     
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "Text Typer"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Chainsaw Human Typing"))
         self.delayLabel.setText(_translate("MainWindow", "Delay (s):"))
         self.intervalLabel.setText(_translate("MainWindow", "Interval (s):"))
         self.charPerStrokeLabel.setText(_translate("MainWindow", "Chars per stroke:"))
