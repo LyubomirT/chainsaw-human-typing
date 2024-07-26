@@ -17,3 +17,5 @@
 1. Open the `README.md` file.
 2. Translate the text in the file.
 3. Save it to `readmes/README-<language>.md`. For example, if you want to translate to French, save it to `readmes/README-French.md`.
+4. Link the `README.md` file to the translated file.
+5. Link the translated file to the `README.md` file.
