@@ -50,7 +50,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             type_enter = self.enterCheckBox.isChecked()
             chars_per_stroke = int(self.charPerStrokeSpinBox.value())
         except ValueError:
-            QMessageBox.critical(self, "Error", "Invalid input for delay, interval, or chars per stroke.")
+            QMessageBox.critical(self, "错误", "对延迟, 间隔, 或每笔字符数的无效输入.")
             return
 
         self.startButton.setEnabled(False)
