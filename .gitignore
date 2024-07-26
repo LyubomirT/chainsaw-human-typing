@@ -3,3 +3,4 @@ test
 simulator.py
 Virtual/
 output/
+dist/
