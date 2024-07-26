@@ -12,7 +12,7 @@ It's ️quite easy to use, actually! Just type the text you want to simulate typ
 
 ## Contributing 🤝
 
-If you want to contribute to this project, feel free to fork it and submit a pull request. I'll be happy to review it! If you have any questions, feel free to open an issue.
+If you want to contribute to this project, feel free to fork it and submit a pull request. I'll be happy to review it! If you have any questions, feel free to open an issue. Please check the [CONTRIBUTING](CONTRIBUTING.md) file for more information.
 
 ## License 📝
 
