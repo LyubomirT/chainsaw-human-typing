@@ -2,6 +2,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 import ctypes
 import json
 import os
+import sys
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -10,7 +11,8 @@ class Ui_MainWindow(object):
         MainWindow.setMinimumSize(QtCore.QSize(600, 400))
         MainWindow.setMaximumSize(QtCore.QSize(600, 400))
         MainWindow.setWindowIcon(QtGui.QIcon("logo.png"))
-        ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID("Chainsaw Human Typing")
+        if sys.platform == "win32":
+            ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID("Chainsaw Human Typing")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         
