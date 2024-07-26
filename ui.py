@@ -1,5 +1,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 import ctypes
+import json
+import os
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -73,6 +75,10 @@ class Ui_MainWindow(object):
         self.progressBar.setObjectName("progressBar")
         self.settingsLayout.addWidget(self.progressBar)
         
+        self.languageComboBox = QtWidgets.QComboBox(self.horizontalLayoutWidget)
+        self.languageComboBox.setObjectName("languageComboBox")
+        self.settingsLayout.addWidget(self.languageComboBox)
+        
         self.horizontalLayout.addLayout(self.settingsLayout)
         
         MainWindow.setCentralWidget(self.centralwidget)
@@ -81,11 +87,37 @@ class Ui_MainWindow(object):
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
     
     def retranslateUi(self, MainWindow):
+        self.current_language = "en"  # Default language
+        self.translations = {}
+        self.load_translations()
+        
+        self.languageComboBox.currentTextChanged.connect(self.change_language)
+        self.update_ui_text()
+
+    def load_translations(self):
+        translations_dir = "translations"
+        for filename in os.listdir(translations_dir):
+            if filename.endswith(".json"):
+                language_code = filename[:-5]  # Remove .json extension
+                with open(os.path.join(translations_dir, filename), "r", encoding="utf-8") as f:
+                    self.translations[language_code] = json.load(f)
+                self.languageComboBox.addItem(language_code)
+
+    def change_language(self, language):
+        self.current_language = language
+        self.update_ui_text()
+
+    def update_ui_text(self):
+        translation = self.translations.get(self.current_language, self.translations["English"])
+        for item in translation["MainWindow"]:
+            component = getattr(self, item["component"], None)
+            if component:
+                component.setText(item["text"])
+        
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "Chainsaw Human Typing"))
-        self.delayLabel.setText(_translate("MainWindow", "Delay (s):"))
-        self.intervalLabel.setText(_translate("MainWindow", "Interval (s):"))
-        self.charPerStrokeLabel.setText(_translate("MainWindow", "Chars per stroke:"))
+        self.delayLabel.setText(_translate("MainWindow", "Delay (seconds)"))
+        self.intervalLabel.setText(_translate("MainWindow", "Interval (seconds)"))
+        self.charPerStrokeLabel.setText(_translate("MainWindow", "Characters per stroke"))
         self.enterCheckBox.setText(_translate("MainWindow", "Type Enter"))
-        self.startButton.setText(_translate("MainWindow", "Start Typing"))
-        self.stopButton.setText(_translate("MainWindow", "Stop Typing"))
+        self.startButton.setText(_translate("MainWindow", "Start"))
+        self.stopButton.setText(_translate("MainWindow", "Stop"))

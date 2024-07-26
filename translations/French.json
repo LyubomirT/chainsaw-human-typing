@@ -1,0 +1,28 @@
+{
+    "MainWindow": [
+        {
+            "component": "delayLabel",
+            "text": "Délai (s) :"
+        },
+        {
+            "component": "intervalLabel",
+            "text": "Intervalle (s) :"
+        },
+        {
+            "component": "charPerStrokeLabel",
+            "text": "Caractères par frappe :"
+        },
+        {
+            "component": "enterCheckBox",
+            "text": "Taper Entrée"
+        },
+        {
+            "component": "startButton",
+            "text": "Commencer la frappe"
+        },
+        {
+            "component": "stopButton",
+            "text": "Arrêter la frappe"
+        }
+    ]
+}

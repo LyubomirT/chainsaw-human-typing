@@ -1,0 +1,28 @@
+{
+    "MainWindow": [
+        {
+            "component": "delayLabel",
+            "text": "Delay (s):"
+        },
+        {
+            "component": "intervalLabel",
+            "text": "Interval (s):"
+        },
+        {
+            "component": "charPerStrokeLabel",
+            "text": "Chars per stroke:"
+        },
+        {
+            "component": "enterCheckBox",
+            "text": "Type Enter"
+        },
+        {
+            "component": "startButton",
+            "text": "Start Typing"
+        },
+        {
+            "component": "stopButton",
+            "text": "Stop Typing"
+        }
+    ]
+}
