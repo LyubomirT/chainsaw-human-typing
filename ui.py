@@ -11,7 +11,7 @@ class Ui_MainWindow(object):
         MainWindow.setMinimumSize(QtCore.QSize(600, 400))
         MainWindow.setMaximumSize(QtCore.QSize(600, 400))
         MainWindow.setWindowIcon(QtGui.QIcon("logo.png"))
-        if sys.platform == "win32":
+        if sys.platform == "win32" and hasattr(ctypes.windll, "shell32"):
             ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID("Chainsaw Human Typing")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
