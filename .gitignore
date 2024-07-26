@@ -2,3 +2,4 @@ __pycache__/
 test
 simulator.py
 Virtual/
+output/
