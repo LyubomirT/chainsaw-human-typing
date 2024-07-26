@@ -61,6 +61,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.thread = TypingThread(text, interval, type_enter, chars_per_stroke)
         self.thread.progress.connect(self.update_progress)
         self.thread.finished.connect(self.typing_finished)
+        self.progressBar.setValue(0)
         self.thread.start()
 
     def update_progress(self, value):
@@ -69,7 +70,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def typing_finished(self):
         self.startButton.setEnabled(True)
         self.stopButton.setEnabled(False)
-        self.progressBar.setValue(0)
 
     def stop_typing(self):
         if self.thread:

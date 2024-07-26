@@ -36,8 +36,9 @@ class Ui_MainWindow(object):
         self.settingsLayout.addWidget(self.intervalLabel)
         
         self.intervalSpinBox = QtWidgets.QDoubleSpinBox(self.horizontalLayoutWidget)
-        self.intervalSpinBox.setRange(0.01, 10.0)
-        self.intervalSpinBox.setSingleStep(0.01)
+        self.intervalSpinBox.setRange(0.00001, 10.0)
+        self.intervalSpinBox.setSingleStep(0.00001)
+        self.intervalSpinBox.setDecimals(5)
         self.intervalSpinBox.setObjectName("intervalSpinBox")
         self.settingsLayout.addWidget(self.intervalSpinBox)
         
@@ -46,7 +47,7 @@ class Ui_MainWindow(object):
         self.settingsLayout.addWidget(self.charPerStrokeLabel)
         
         self.charPerStrokeSpinBox = QtWidgets.QSpinBox(self.horizontalLayoutWidget)
-        self.charPerStrokeSpinBox.setRange(1, 10)
+        self.charPerStrokeSpinBox.setRange(1, 50)
         self.charPerStrokeSpinBox.setObjectName("charPerStrokeSpinBox")
         self.settingsLayout.addWidget(self.charPerStrokeSpinBox)
         
