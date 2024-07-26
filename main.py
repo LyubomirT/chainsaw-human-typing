@@ -56,7 +56,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         self.startButton.setEnabled(False)
         self.stopButton.setEnabled(True)
-        time.sleep(delay)
+        if delay > 0:
+            QTimer.singleShot(delay * 1000, lambda: self.initiate_typing(text, interval, type_enter, chars_per_stroke))
+        else:
+            pass
         self.initiate_typing(text, interval, type_enter, chars_per_stroke)
 
     def initiate_typing(self, text, interval, type_enter, chars_per_stroke):
