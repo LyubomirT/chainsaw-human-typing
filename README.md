@@ -10,6 +10,10 @@ Simply download one a binary from the [releases](https://github.com/LyubomirT/ch
 
 It's ️quite easy to use, actually! Just type the text you want to simulate typing in the input field and press the "Start Typing" button. The text will be typed out in the input field below. You can see the progress in the progress bar.
 
+## Run from Source 🏗
+
+To run the project from source, you need to have Python 3.6 or higher installed. You also must install the dependencies by running `pip install -r requirements.txt`. After that, you can run the project by running `python main.py`.
+
 ## Contributing 🤝
 
 If you want to contribute to this project, feel free to fork it and submit a pull request. I'll be happy to review it! If you have any questions, feel free to open an issue. Please check the [CONTRIBUTING](CONTRIBUTING.md) file for more information.
