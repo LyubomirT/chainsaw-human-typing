@@ -82,10 +82,10 @@ class Ui_MainWindow(object):
     
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "Chainsaw Human Typing"))
-        self.delayLabel.setText(_translate("MainWindow", "Delay (s):"))
-        self.intervalLabel.setText(_translate("MainWindow", "Interval (s):"))
-        self.charPerStrokeLabel.setText(_translate("MainWindow", "Chars per stroke:"))
-        self.enterCheckBox.setText(_translate("MainWindow", "Type Enter"))
-        self.startButton.setText(_translate("MainWindow", "Start Typing"))
-        self.stopButton.setText(_translate("MainWindow", "Stop Typing"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "电锯人打字"))
+        self.delayLabel.setText(_translate("MainWindow", "延迟 (秒):"))
+        self.intervalLabel.setText(_translate("MainWindow", "间隔 (秒):"))
+        self.charPerStrokeLabel.setText(_translate("MainWindow", "每笔字符数:"))
+        self.enterCheckBox.setText(_translate("MainWindow", "输入 Enter"))
+        self.startButton.setText(_translate("MainWindow", "开始打字"))
+        self.stopButton.setText(_translate("MainWindow", "停止打字"))
