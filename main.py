@@ -55,7 +55,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         self.startButton.setEnabled(False)
         self.stopButton.setEnabled(True)
-        QTimer.singleShot(delay * 1000, lambda: self.initiate_typing(text, interval, type_enter, chars_per_stroke))
+        time.sleep(delay)
+        self.initiate_typing(text, interval, type_enter, chars_per_stroke)
 
     def initiate_typing(self, text, interval, type_enter, chars_per_stroke):
         self.thread = TypingThread(text, interval, type_enter, chars_per_stroke)
@@ -66,7 +67,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def update_progress(self, value):
         self.progressBar.setValue(value)
-
+    
     def typing_finished(self):
         self.startButton.setEnabled(True)
         self.stopButton.setEnabled(False)
