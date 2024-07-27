@@ -83,6 +83,7 @@ class Ui_MainWindow(object):
         
         self.languageComboBox = QtWidgets.QComboBox(self.horizontalLayoutWidget)
         self.languageComboBox.setObjectName("languageComboBox")
+        self.languageComboBox.currentTextChanged.connect(self.change_language)
         self.settingsLayout.addWidget(self.languageComboBox)
 
         self.lightModeCheckBox = QtWidgets.QCheckBox(self.horizontalLayoutWidget)
@@ -92,15 +93,9 @@ class Ui_MainWindow(object):
         self.horizontalLayout.addLayout(self.settingsLayout)
         
         MainWindow.setCentralWidget(self.centralwidget)
-        
-        self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
-    
-    def retranslateUi(self, MainWindow):
+
         self.load_translations()
-        
-        self.languageComboBox.currentTextChanged.connect(self.change_language)
-        self.update_ui_text()
 
     def load_translations(self):
         self.translations = {}
@@ -114,21 +109,12 @@ class Ui_MainWindow(object):
 
     def change_language(self):
         self.current_language = self.languageComboBox.currentText()
+        print(f"Changed language to {self.current_language}")
         self.update_ui_text()
 
     def update_ui_text(self):
-        print(self.current_language)
         translation = self.translations.get(self.current_language, self.translations["English"])
         for item in translation["MainWindow"]:
             component = getattr(self, item["component"], None)
             if component:
                 component.setText(item["text"])
-        
-        _translate = QtCore.QCoreApplication.translate
-        self.delayLabel.setText(_translate("MainWindow", "Delay (seconds)"))
-        self.intervalLabel.setText(_translate("MainWindow", "Interval (seconds)"))
-        self.charPerStrokeLabel.setText(_translate("MainWindow", "Characters per stroke"))
-        self.enterCheckBox.setText(_translate("MainWindow", "Type Enter"))
-        self.startButton.setText(_translate("MainWindow", "Start"))
-        self.lightModeCheckBox.setText(_translate("MainWindow", "Light Mode"))
-        self.stopButton.setText(_translate("MainWindow", "Stop"))

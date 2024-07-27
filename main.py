@@ -38,6 +38,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         super().__init__()
         self.setupUi(self)
         self.setWindowFlags(self.windowFlags() | Qt.WindowStaysOnTopHint)
+        # set window title
+        self.setWindowTitle("Chainsaw Human Typing")
         self.startButton.clicked.connect(self.start_typing)
         self.stopButton.clicked.connect(self.stop_typing)
         self.languageComboBox.currentTextChanged.connect(self.change_language)
@@ -82,9 +84,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.thread.wait()
             self.thread = None
         self.typing_finished()
-
-    def change_language(self, language):
-        self.update_ui_text()
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
