@@ -6,7 +6,11 @@ import sys
 
 class Ui_MainWindow(object):
     def __init__(self):
-        self.current_language = "English"
+        if os.path.exists("language.txt"):
+            with open("language.txt", "r", encoding="utf-8") as f:
+                self.current_language = f.read()
+        else: 
+            self.current_language = "English"
         self.translations = {}
 
     def setupUi(self, MainWindow):
@@ -83,7 +87,7 @@ class Ui_MainWindow(object):
         
         self.languageComboBox = QtWidgets.QComboBox(self.horizontalLayoutWidget)
         self.languageComboBox.setObjectName("languageComboBox")
-        self.languageComboBox.currentTextChanged.connect(self.change_language)
+        self.languageComboBox.currentTextChanged.connect(lambda hakka: self.change_language)
         self.settingsLayout.addWidget(self.languageComboBox)
 
         self.lightModeCheckBox = QtWidgets.QCheckBox(self.horizontalLayoutWidget)
@@ -96,6 +100,11 @@ class Ui_MainWindow(object):
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
         self.load_translations()
+
+        self.update_ui_text()
+
+        # set the current language of the dropdown to the saved language
+        self.languageComboBox.setCurrentText(self.current_language)
 
     def load_translations(self):
         self.translations = {}
@@ -110,7 +119,10 @@ class Ui_MainWindow(object):
     def change_language(self):
         self.current_language = self.languageComboBox.currentText()
         print(f"Changed language to {self.current_language}")
+        with open("language.txt", "w", encoding="utf-8") as f:
+            f.write(self.current_language)
         self.update_ui_text()
+
 
     def update_ui_text(self):
         translation = self.translations.get(self.current_language, self.translations["English"])
