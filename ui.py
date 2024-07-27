@@ -92,6 +92,8 @@ class Ui_MainWindow(object):
 
         self.lightModeCheckBox = QtWidgets.QCheckBox(self.horizontalLayoutWidget)
         self.lightModeCheckBox.setObjectName("lightModeCheckBox")
+        self.lightModeCheckBox.clicked.connect(self.toggleTheme)
+        self.lightModeCheckBox.setChecked(True)
         self.settingsLayout.addWidget(self.lightModeCheckBox)
         
         self.horizontalLayout.addLayout(self.settingsLayout)

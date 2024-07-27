@@ -84,6 +84,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.thread.wait()
             self.thread = None
         self.typing_finished()
+    
+    def toggleTheme(self):
+        if self.lightModeCheckBox.isChecked():
+            self.setStyleSheet(open("style.css").read())
+        else:
+            self.setStyleSheet(open("darkmode.css").read())
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
