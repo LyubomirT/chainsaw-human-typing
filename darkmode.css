@@ -36,7 +36,7 @@ QCheckBox {
 QPushButton {
     font-size: 9pt;
     padding: 10px;
-    background-color: #444444;
+    background-color: #666666;
     color: #ffffff;
     border: none;
     border-radius: 5px;
@@ -44,7 +44,7 @@ QPushButton {
 }
 
 QPushButton:hover {
-    background-color: #666666;
+    background-color: #444444;
 }
 
 QPushButton:disabled {
@@ -62,4 +62,12 @@ QProgressBar {
 QProgressBar::chunk {
     background-color: #ffdc5f;
     width: 10px;
+}
+
+QComboBox {
+    font-size: 10pt;
+    background-color: #222222;
+    border: 1px solid #555555;
+    padding: 5px;
+    color: #ffffff;
 }

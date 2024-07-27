@@ -88,7 +88,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    app.setStyleSheet(open("style.css").read())
+    app.setStyleSheet(open("darkmode.css").read())
     window = MainWindow()
     window.show()
     sys.exit(app.exec_())

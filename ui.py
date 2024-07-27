@@ -7,9 +7,9 @@ import sys
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(600, 400)
-        MainWindow.setMinimumSize(QtCore.QSize(600, 400))
-        MainWindow.setMaximumSize(QtCore.QSize(600, 400))
+        MainWindow.resize(600, 450)
+        MainWindow.setMinimumSize(QtCore.QSize(600, 450))
+        MainWindow.setMaximumSize(QtCore.QSize(600, 450))
         MainWindow.setWindowIcon(QtGui.QIcon("logo.png"))
         if sys.platform == "win32" and hasattr(ctypes.windll, "shell32"):
             ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID("Chainsaw Human Typing")
@@ -17,7 +17,7 @@ class Ui_MainWindow(object):
         self.centralwidget.setObjectName("centralwidget")
         
         self.horizontalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.horizontalLayoutWidget.setGeometry(QtCore.QRect(20, 20, 560, 340))
+        self.horizontalLayoutWidget.setGeometry(QtCore.QRect(20, 20, 561, 411))
         self.horizontalLayoutWidget.setObjectName("horizontalLayoutWidget")
         
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget)

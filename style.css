@@ -63,3 +63,11 @@ QProgressBar::chunk {
     background-color: #ffdc5f;
     width: 10px;
 }
+
+QComboBox {
+    font-size: 10pt;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    padding: 5px;
+    color: #000000;
+}
