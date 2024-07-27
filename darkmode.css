@@ -1,0 +1,65 @@
+QMainWindow {
+    background-color: #333333;
+}
+
+QTextEdit {
+    font-family: "Verdana";
+    font-size: 12pt;
+    background-color: #222222;
+    border: 1px solid #555555;
+    padding: 5px;
+    color: #ffffff;
+}
+
+QLabel {
+    font-size: 10pt;
+    margin-bottom: 5px;
+    color: #ffffff;
+}
+
+QSpinBox, QDoubleSpinBox {
+    font-size: 10pt;
+    background-color: #222222;
+    border: 1px solid #555555;
+    padding: 5px;
+    width: 100px;
+    color: #ffffff;
+}
+
+QCheckBox {
+    font-size: 10pt;
+    margin: 10px 0;
+    padding: 10px;
+    color: #ffffff;
+}
+
+QPushButton {
+    font-size: 9pt;
+    padding: 10px;
+    background-color: #444444;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    font: bold;
+}
+
+QPushButton:hover {
+    background-color: #666666;
+}
+
+QPushButton:disabled {
+    background-color: #555555;
+}
+
+QProgressBar {
+    font-size: 10pt;
+    text-align: center;
+    background-color: #222222;
+    border: 1px solid #555555;
+    height: 20px;
+}
+
+QProgressBar::chunk {
+    background-color: #ffdc5f;
+    width: 10px;
+}
