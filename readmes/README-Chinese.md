@@ -2,6 +2,8 @@
 
 欢迎来到 chainsaw-human-typing 仓库！Chainsaw Human Typing 是一种工具，允许你在键盘上模拟人类输入（如果你不想或不能的话）。例如，这对于模拟视频中的人类打字非常有用。
 
+English/英文 README [README-EN](https://github.com/LyubomirT/chainsaw-human-typing/README.md)
+
 ## 快速上手 🚀
 
 只需从 [releases](https://github.com/LyubomirT/chainsaw-human-typing/releases) 页面下载一个二进制文件并运行它。你也可以通过克隆存储库并运行`python main.py`来自己构建它。
