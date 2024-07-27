@@ -1,0 +1,28 @@
+{
+    "MainWindow": [
+        {
+            "component": "delayLabel",
+            "text": "延迟（秒）:"
+        },
+        {
+            "component": "intervalLabel",
+            "text": "间隔（秒）:"
+        },
+        {
+            "component": "charPerStrokeLabel",
+            "text": "每笔多少个字符:"
+        },
+        {
+            "component": "enterCheckBox",
+            "text": "输入 Enter"
+        },
+        {
+            "component": "startButton",
+            "text": "开始打字"
+        },
+        {
+            "component": "stopButton",
+            "text": "停止打字"
+        }
+    ]
+}
