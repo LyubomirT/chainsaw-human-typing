@@ -91,6 +91,16 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         else:
             self.setStyleSheet(open("darkmode.css").read())
 
+        self.save_theme_based_on_last_choice()
+
+    def save_theme_based_on_last_choice(self):
+        if self.lightModeCheckBox.isChecked():
+            with open("theme.txt", "w", encoding="utf-8") as f:
+                f.write("light")
+        else:
+            with open("theme.txt", "w", encoding="utf-8") as f:
+                f.write("dark")
+
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     app.setStyleSheet(open("style.css").read())

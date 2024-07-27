@@ -105,6 +105,8 @@ class Ui_MainWindow(object):
 
         self.update_ui_text()
 
+        self.load_theme_based_on_last_choice()
+
         # set the current language of the dropdown to the saved language
         self.languageComboBox.setCurrentText(self.current_language)
 
@@ -117,6 +119,18 @@ class Ui_MainWindow(object):
                 with open(os.path.join(translations_dir, filename), "r", encoding="utf-8") as f:
                     self.translations[language_code] = json.load(f)
                 self.languageComboBox.addItem(language_code)
+    
+    def load_theme_based_on_last_choice(self):
+        if not os.path.exists("theme.txt"):
+            return
+        with open("theme.txt", "r", encoding="utf-8") as f:
+            theme = f.read()
+        if theme == "dark":
+            self.lightModeCheckBox.setChecked(False)
+            self.toggleTheme()
+        if theme == "light":
+            self.lightModeCheckBox.setChecked(True)
+            self.toggleTheme()
 
     def change_language(self):
         self.current_language = self.languageComboBox.currentText()
