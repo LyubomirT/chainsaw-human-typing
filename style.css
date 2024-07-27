@@ -29,8 +29,8 @@ QSpinBox, QDoubleSpinBox {
 QCheckBox {
     font-size: 10pt;
     margin: 10px 0;
-    padding: 10px;
     color: #000000;
+
 }
 
 QPushButton {

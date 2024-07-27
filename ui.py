@@ -7,9 +7,9 @@ import sys
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(600, 450)
-        MainWindow.setMinimumSize(QtCore.QSize(600, 450))
-        MainWindow.setMaximumSize(QtCore.QSize(600, 450))
+        MainWindow.resize(600, 500)
+        MainWindow.setMinimumSize(QtCore.QSize(600, 500))
+        MainWindow.setMaximumSize(QtCore.QSize(600, 500))
         MainWindow.setWindowIcon(QtGui.QIcon("logo.png"))
         if sys.platform == "win32" and hasattr(ctypes.windll, "shell32"):
             ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID("Chainsaw Human Typing")
@@ -17,7 +17,7 @@ class Ui_MainWindow(object):
         self.centralwidget.setObjectName("centralwidget")
         
         self.horizontalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.horizontalLayoutWidget.setGeometry(QtCore.QRect(20, 20, 561, 411))
+        self.horizontalLayoutWidget.setGeometry(QtCore.QRect(20, 20, 561, 421))
         self.horizontalLayoutWidget.setObjectName("horizontalLayoutWidget")
         
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget)
@@ -80,6 +80,10 @@ class Ui_MainWindow(object):
         self.languageComboBox = QtWidgets.QComboBox(self.horizontalLayoutWidget)
         self.languageComboBox.setObjectName("languageComboBox")
         self.settingsLayout.addWidget(self.languageComboBox)
+
+        self.lightModeCheckBox = QtWidgets.QCheckBox(self.horizontalLayoutWidget)
+        self.lightModeCheckBox.setObjectName("lightModeCheckBox")
+        self.settingsLayout.addWidget(self.lightModeCheckBox)
         
         self.horizontalLayout.addLayout(self.settingsLayout)
         
@@ -89,7 +93,7 @@ class Ui_MainWindow(object):
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
     
     def retranslateUi(self, MainWindow):
-        self.current_language = "en"  # Default language
+        self.current_language = "English"  # Default language
         self.translations = {}
         self.load_translations()
         
@@ -122,4 +126,5 @@ class Ui_MainWindow(object):
         self.charPerStrokeLabel.setText(_translate("MainWindow", "Characters per stroke"))
         self.enterCheckBox.setText(_translate("MainWindow", "Type Enter"))
         self.startButton.setText(_translate("MainWindow", "Start"))
+        self.lightModeCheckBox.setText(_translate("MainWindow", "Light Mode"))
         self.stopButton.setText(_translate("MainWindow", "Stop"))
