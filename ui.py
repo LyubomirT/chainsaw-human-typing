@@ -5,6 +5,10 @@ import os
 import sys
 
 class Ui_MainWindow(object):
+    def __init__(self):
+        self.current_language = "English"
+        self.translations = {}
+
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(600, 500)
@@ -93,14 +97,13 @@ class Ui_MainWindow(object):
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
     
     def retranslateUi(self, MainWindow):
-        self.current_language = "English"  # Default language
-        self.translations = {}
         self.load_translations()
         
         self.languageComboBox.currentTextChanged.connect(self.change_language)
         self.update_ui_text()
 
     def load_translations(self):
+        self.translations = {}
         translations_dir = "translations"
         for filename in os.listdir(translations_dir):
             if filename.endswith(".json"):
@@ -109,11 +112,12 @@ class Ui_MainWindow(object):
                     self.translations[language_code] = json.load(f)
                 self.languageComboBox.addItem(language_code)
 
-    def change_language(self, language):
-        self.current_language = language
+    def change_language(self):
+        self.current_language = self.languageComboBox.currentText()
         self.update_ui_text()
 
     def update_ui_text(self):
+        print(self.current_language)
         translation = self.translations.get(self.current_language, self.translations["English"])
         for item in translation["MainWindow"]:
             component = getattr(self, item["component"], None)
