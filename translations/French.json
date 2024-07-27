@@ -23,6 +23,10 @@
         {
             "component": "stopButton",
             "text": "Arrêter la frappe"
+        },
+        {
+            "component": "lightModeCheckBox",
+            "text": "Mode Lumière"
         }
     ]
 }
