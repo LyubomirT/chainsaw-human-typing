@@ -61,8 +61,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         if delay > 0:
             QTimer.singleShot(delay * 1000, lambda: self.initiate_typing(text, interval, type_enter, chars_per_stroke))
         else:
-            pass
-        self.initiate_typing(text, interval, type_enter, chars_per_stroke)
+            self.initiate_typing(text, interval, type_enter, chars_per_stroke)
 
     def initiate_typing(self, text, interval, type_enter, chars_per_stroke):
         self.thread = TypingThread(text, interval, type_enter, chars_per_stroke)
