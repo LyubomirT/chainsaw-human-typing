@@ -34,12 +34,13 @@ QCheckBox {
 }
 
 QPushButton {
-    font-size: 12pt;
+    font-size: 9pt;
     padding: 10px;
     background-color: #f9d039;
     color: #ffffff;
     border: none;
     border-radius: 5px;
+    font: bold;
 }
 
 QPushButton:hover {
