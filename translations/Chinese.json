@@ -23,6 +23,10 @@
         {
             "component": "stopButton",
             "text": "停止打字"
+        },
+        {
+            "component": "lightModeCheckbox",
+            "text": "轻模式"
         }
     ]
 }
