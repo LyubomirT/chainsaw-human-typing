@@ -28,4 +28,4 @@ English/英文 README [README-EN](https://github.com/LyubomirT/chainsaw-human-ty
 
 - [PyQt5](https://pypi.org/project/PyQt5/)
 - [PyInstaller](https://pypi.org/project/pyinstaller/)
-- [PyAutoGUI](https://pypi.org/project/PyAutoGUI/)
+- [PyNput](https://pypi.org/project/pynput/)

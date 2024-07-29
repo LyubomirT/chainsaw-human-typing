@@ -32,4 +32,4 @@ This project is licensed under the GPL-3.0 License - see the [LICENSE](LICENSE) 
 
 - [PyQt5](https://pypi.org/project/PyQt5/)
 - [PyInstaller](https://pypi.org/project/pyinstaller/)
-- [PyAutoGUI](https://pypi.org/project/PyAutoGUI/)
+- [PyNput](https://pypi.org/project/pynput/)
