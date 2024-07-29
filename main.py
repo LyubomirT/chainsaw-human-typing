@@ -1,10 +1,10 @@
 import sys
 import time
 import random
-import pyautogui
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox
 from PyQt5.QtCore import QTimer, Qt, QThread, pyqtSignal
 from ui import Ui_MainWindow
+from pynput.keyboard import Controller, Key
 
 class TypingThread(QThread):
     progress = pyqtSignal(int)
@@ -18,19 +18,21 @@ class TypingThread(QThread):
         self.chars_per_stroke = chars_per_stroke
         self.randomize_interval = randomize_interval
         self.running = True
+        self.keyboard = Controller()
 
     def run(self):
         i = 0
         while i < len(self.text) and self.running:
             if self.text[i] == '\n' and self.type_enter:
-                pyautogui.press('enter')
+                self.keyboard.press(Key.enter)
+                self.keyboard.release(Key.enter)
                 i += 1
             else:
-                pyautogui.write(self.text[i:i + self.chars_per_stroke])
+                chunk = self.text[i:i + self.chars_per_stroke]
+                self.keyboard.type(chunk)
                 i += self.chars_per_stroke
             
             if self.randomize_interval:
-                # Randomize the interval between 80% and 120% of the original value
                 current_interval = self.interval * random.uniform(0.4, 1.8)
             else:
                 current_interval = self.interval
@@ -51,6 +53,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.startButton.clicked.connect(self.start_typing)
         self.stopButton.clicked.connect(self.stop_typing)
         self.languageComboBox.currentTextChanged.connect(self.change_language)
+        self.lightModeCheckBox.toggled.connect(self.toggleTheme)
         self.thread = None
 
     def start_typing(self):
@@ -98,17 +101,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.setStyleSheet(open("style.css").read())
         else:
             self.setStyleSheet(open("darkmode.css").read())
-
         self.save_theme_based_on_last_choice()
 
     def save_theme_based_on_last_choice(self):
-        if self.lightModeCheckBox.isChecked():
-            with open("theme.txt", "w", encoding="utf-8") as f:
-                f.write("light")
-        else:
-            with open("theme.txt", "w", encoding="utf-8") as f:
-                f.write("dark")
-
+        with open("theme.txt", "w", encoding="utf-8") as f:
+            f.write("light" if self.lightModeCheckBox.isChecked() else "dark")
+            
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     app.setStyleSheet(open("style.css").read())
