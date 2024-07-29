@@ -1,5 +1,6 @@
 import sys
 import time
+import random
 import pyautogui
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox
 from PyQt5.QtCore import QTimer, Qt, QThread, pyqtSignal
@@ -9,12 +10,13 @@ class TypingThread(QThread):
     progress = pyqtSignal(int)
     finished = pyqtSignal()
 
-    def __init__(self, text, interval, type_enter, chars_per_stroke):
+    def __init__(self, text, interval, type_enter, chars_per_stroke, randomize_interval):
         super().__init__()
         self.text = text
         self.interval = interval
         self.type_enter = type_enter
         self.chars_per_stroke = chars_per_stroke
+        self.randomize_interval = randomize_interval
         self.running = True
 
     def run(self):
@@ -26,7 +28,14 @@ class TypingThread(QThread):
             else:
                 pyautogui.write(self.text[i:i + self.chars_per_stroke])
                 i += self.chars_per_stroke
-            time.sleep(self.interval)
+            
+            if self.randomize_interval:
+                # Randomize the interval between 80% and 120% of the original value
+                current_interval = self.interval * random.uniform(0.8, 1.2)
+            else:
+                current_interval = self.interval
+            
+            time.sleep(current_interval)
             self.progress.emit(int(i / len(self.text) * 100))
         self.finished.emit()
 
@@ -38,7 +47,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         super().__init__()
         self.setupUi(self)
         self.setWindowFlags(self.windowFlags() | Qt.WindowStaysOnTopHint)
-        # set window title
         self.setWindowTitle("Chainsaw Human Typing")
         self.startButton.clicked.connect(self.start_typing)
         self.stopButton.clicked.connect(self.stop_typing)
@@ -52,6 +60,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             interval = float(self.intervalSpinBox.value())
             type_enter = self.enterCheckBox.isChecked()
             chars_per_stroke = int(self.charPerStrokeSpinBox.value())
+            randomize_interval = self.randomizeIntervalCheckBox.isChecked()
         except ValueError:
             QMessageBox.critical(self, "Error", "Invalid input for delay, interval, or chars per stroke.")
             return
@@ -59,12 +68,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.startButton.setEnabled(False)
         self.stopButton.setEnabled(True)
         if delay > 0:
-            QTimer.singleShot(delay * 1000, lambda: self.initiate_typing(text, interval, type_enter, chars_per_stroke))
+            QTimer.singleShot(delay * 1000, lambda: self.initiate_typing(text, interval, type_enter, chars_per_stroke, randomize_interval))
         else:
-            self.initiate_typing(text, interval, type_enter, chars_per_stroke)
+            self.initiate_typing(text, interval, type_enter, chars_per_stroke, randomize_interval)
 
-    def initiate_typing(self, text, interval, type_enter, chars_per_stroke):
-        self.thread = TypingThread(text, interval, type_enter, chars_per_stroke)
+    def initiate_typing(self, text, interval, type_enter, chars_per_stroke, randomize_interval):
+        self.thread = TypingThread(text, interval, type_enter, chars_per_stroke, randomize_interval)
         self.thread.progress.connect(self.update_progress)
         self.thread.finished.connect(self.typing_finished)
         self.progressBar.setValue(0)
