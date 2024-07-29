@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>从源代码运行 - Chainsaw Human Typing</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>从源代码运行 Chainsaw Human Typing</h1>
+        <div class="section">
+            <p>要从源代码运行 Chainsaw Human Typing , 跟随以下步骤:</p>
+            <ol>
+                <li><strong>安装 Python:</strong> 确保你安装了 Python 3.6 或更高版本。 你可以从这里下载Python <a href="https://www.python.org/downloads/">【Python官网】</a>.</li>
+                <li><strong>克隆仓库:</strong> 用Git克隆仓库。 打开终端然后运行:
+                    <pre><code>git clone https://github.com/LyubomirT/chainsaw-human-typing.git</code></pre>
+                </li>
+                <li><strong>安装依赖:</strong> 去到项目根目录然后安装必要的依赖:
+                    <pre><code>pip install -r requirements.txt</code></pre>
+                </li>
+                <li><strong>运行APP:</strong> 运行主脚本来运行app:
+                    <pre><code>python main.py</code></pre>
+                </li>
+                <li><strong>构建项目:</strong> 要把app构建为一个可执行文件, 你可以使用PyInstaller. 运行以下Powershell脚本:
+                    <pre><code>.\build.ps1</code></pre>
+                    这会在 <code>dist</code> 文件夹创造一个可执行文件。</li>
+            </ol>
+        </div>
+        <a href="Chinese/index.html">回到主页</a>
+    </div>
+    <script src="../script.js"></script>
+</body>
+</html>

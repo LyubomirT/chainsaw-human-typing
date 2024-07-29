@@ -24,6 +24,10 @@ If you want to contribute to this project, feel free to fork it and submit a pul
 
 This project is licensed under the GPL-3.0 License - see the [LICENSE](LICENSE) file for details.
 
+## Translations 🎌
+
+- 中文/Chinese README  [README-ZHCN](https://github.com/LyubomirT/chainsaw-human-typing/readmes/README-Chinese.md) 
+
 ## Acknowledgements 🙏
 
 - [PyQt5](https://pypi.org/project/PyQt5/)
