@@ -31,7 +31,7 @@ class TypingThread(QThread):
             
             if self.randomize_interval:
                 # Randomize the interval between 80% and 120% of the original value
-                current_interval = self.interval * random.uniform(0.8, 1.2)
+                current_interval = self.interval * random.uniform(0.4, 1.8)
             else:
                 current_interval = self.interval
             
