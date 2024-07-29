@@ -27,6 +27,10 @@
         {
             "component": "lightModeCheckBox",
             "text": "Mode Lumière"
+        },
+        {
+            "component": "randomizeIntervalCheckBox",
+            "text": "Intervalle Aléatoire"
         }
     ]
 }

@@ -27,6 +27,10 @@
         {
             "component": "lightModeCheckbox",
             "text": "轻模式"
+        },
+        {
+            "component": "randomizeIntervalCheckbox",
+            "text": "随机化间隔"
         }
     ]
 }

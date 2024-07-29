@@ -67,6 +67,10 @@ class Ui_MainWindow(object):
         self.charPerStrokeSpinBox.setRange(1, 50)
         self.charPerStrokeSpinBox.setObjectName("charPerStrokeSpinBox")
         self.settingsLayout.addWidget(self.charPerStrokeSpinBox)
+
+        self.randomizeIntervalCheckBox = QtWidgets.QCheckBox(self.horizontalLayoutWidget)
+        self.randomizeIntervalCheckBox.setObjectName("randomizeIntervalCheckBox")
+        self.settingsLayout.addWidget(self.randomizeIntervalCheckBox)
         
         self.enterCheckBox = QtWidgets.QCheckBox(self.horizontalLayoutWidget)
         self.enterCheckBox.setObjectName("enterCheckBox")

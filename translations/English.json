@@ -27,6 +27,10 @@
         {
             "component": "lightModeCheckBox",
             "text": "Light Mode"
+        },
+        {
+            "component": "randomizeIntervalCheckBox",
+            "text": "Randomize Interval"
         }
     ]
 }
