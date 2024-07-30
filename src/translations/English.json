@@ -1,4 +1,5 @@
 {
+    "original": "English",
     "MainWindow": [
         {
             "component": "delayLabel",

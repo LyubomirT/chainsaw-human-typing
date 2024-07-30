@@ -1,4 +1,5 @@
 {
+    "original": "原文",
     "MainWindow": [
         {
             "component": "delayLabel",
