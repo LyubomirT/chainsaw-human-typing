@@ -12,7 +12,7 @@ It's ️quite easy to use, actually! Just type the text you want to simulate typ
 
 ## Run from Source 🏗
 
-To run the project from source, you need to have Python 3.6 or higher installed. You also must install the dependencies by running `pip install -r requirements.txt`. After that, you can run the project by running `python main.py`.
+To run the project from source, you need to have Python 3.6 or higher installed. You also must install the dependencies by running `pip install -r requirements.txt`. After that, you can run the project by running `python src/main.py`.
 
 To build the project, you can use PyInstaller. `build.ps1` is a PowerShell script that builds the project using PyInstaller. You can run it by running `.\build.ps1`. The output will be in the `dist` folder, note that the script is configured to build a Windows executable and that you need to have PyInstaller installed.
 
