@@ -1,0 +1,37 @@
+{
+    "original": "Norsk (Bokmål)",
+    "MainWindow": [
+        {
+            "component": "delayLabel",
+            "text": "Forsinkelse (s):"
+        },
+        {
+            "component": "intervalLabel",
+            "text": "Intervall (s):"
+        },
+        {
+            "component": "charPerStrokeLabel",
+            "text": "Tegn Per Strek:"
+        },
+        {
+            "component": "enterCheckBox",
+            "text": "Skriv Enter"
+        },
+        {
+            "component": "startButton",
+            "text": "Begynn Å Skrive "
+        },
+        {
+            "component": "stopButton",
+            "text": "Slutt Å Skrive"
+        },
+        {
+            "component": "lightModeCheckBox",
+            "text": "Lysmodus"
+        },
+        {
+            "component": "randomizeIntervalCheckBox",
+            "text": "Tilfeldig Intervall"
+        }
+    ]
+}
