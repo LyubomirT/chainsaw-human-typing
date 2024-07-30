@@ -122,7 +122,8 @@ class Ui_MainWindow(object):
                 language_code = filename[:-5]  # Remove .json extension
                 with open(os.path.join(translations_dir, filename), "r", encoding="utf-8") as f:
                     self.translations[language_code] = json.load(f)
-                self.languageComboBox.addItem(language_code)
+                    language_original = self.translations[language_code].get("original", "Unknown")
+                self.languageComboBox.addItem(language_code + " - " + language_original)
     
     def load_theme_based_on_last_choice(self):
         if not os.path.exists("theme.txt"):
@@ -137,7 +138,7 @@ class Ui_MainWindow(object):
             self.toggleTheme()
 
     def change_language(self):
-        self.current_language = self.languageComboBox.currentText()
+        self.current_language = self.languageComboBox.currentText().split(" - ")[0]
         print(f"Changed language to {self.current_language}")
         with open("language.txt", "w", encoding="utf-8") as f:
             f.write(self.current_language)

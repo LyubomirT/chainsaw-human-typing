@@ -30,7 +30,7 @@
             "text": "轻模式"
         },
         {
-            "component": "randomizeIntervalCheckbox",
+            "component": "randomizeIntervalCheckBox",
             "text": "随机化间隔"
         }
     ]
