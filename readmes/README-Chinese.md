@@ -14,7 +14,8 @@ English/英文 README [README-EN](https://github.com/LyubomirT/chainsaw-human-ty
 
 ## 从源代码运行 🏗
 
-要从源代码运行项目，你需要安装 Python 3.6 或更高版本。你还必须通过运行`pip install -r requirements.txt`来安装依赖项。之后，你可以通过运行`python src/main.py`来运行项目。
+要从源代码运行项目，你需要安装 Python 3.6 或更高版本。你还必须通过运行`pip install -r requirements.txt`来安装依赖项。之后，移动到`src`目录并运行`python main.py`来运行项目。
+
 
 要构建项目，你可以使用 PyInstaller。 `build.ps1`是一个 PowerShell 脚本，用于使用 PyInstaller 生成项目。你可以通过运行`.\build.ps1`来运行它。输出将位于“dist”文件夹中，请注意，该脚本配置为构建 Windows 可执行文件，并且你需要安装 PyInstaller。
 ## 贡献 🤝
