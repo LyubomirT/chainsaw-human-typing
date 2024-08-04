@@ -1,6 +1,7 @@
 import sys
 import time
 import random
+import string
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox
 from PyQt5.QtCore import QTimer, Qt, QThread, pyqtSignal
 from ui import Ui_MainWindow
@@ -10,13 +11,14 @@ class TypingThread(QThread):
     progress = pyqtSignal(int)
     finished = pyqtSignal()
 
-    def __init__(self, text, interval, type_enter, chars_per_stroke, randomize_interval):
+    def __init__(self, text, interval, type_enter, chars_per_stroke, randomize_interval, mistake_percentage):
         super().__init__()
         self.text = text
         self.interval = interval
         self.type_enter = type_enter
         self.chars_per_stroke = chars_per_stroke
         self.randomize_interval = randomize_interval
+        self.mistake_percentage = mistake_percentage
         self.running = True
         self.keyboard = Controller()
 
@@ -29,7 +31,7 @@ class TypingThread(QThread):
                 i += 1
             else:
                 chunk = self.text[i:i + self.chars_per_stroke]
-                self.keyboard.type(chunk)
+                self.type_with_mistake(chunk)
                 i += self.chars_per_stroke
             
             if self.randomize_interval:
@@ -40,6 +42,32 @@ class TypingThread(QThread):
             time.sleep(current_interval)
             self.progress.emit(int(i / len(self.text) * 100))
         self.finished.emit()
+
+    def type_with_mistake(self, chunk):
+        for char in chunk:
+            if random.random() < self.mistake_percentage / 100:
+                # Make a typo
+                wrong_char = random.choice(string.ascii_lowercase)
+                self.keyboard.type(wrong_char)
+                time.sleep(self.interval * 2)  # Pause after typo
+                
+                # Type a few more characters
+                extra_chars = ''.join(random.choices(string.ascii_lowercase, k=random.randint(1, 3)))
+                self.keyboard.type(extra_chars)
+                time.sleep(self.interval * 3)  # Pause after extra chars
+                
+                # Backspace to correct the mistake
+                for _ in range(len(extra_chars) + 1):
+                    self.keyboard.press(Key.backspace)
+                    self.keyboard.release(Key.backspace)
+                    time.sleep(self.interval * 0.5)
+                
+                # Type the correct character
+                self.keyboard.type(char)
+            else:
+                # Type normally
+                self.keyboard.type(char)
+            time.sleep(self.interval)
 
     def stop(self):
         self.running = False
@@ -64,19 +92,20 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             type_enter = self.enterCheckBox.isChecked()
             chars_per_stroke = int(self.charPerStrokeSpinBox.value())
             randomize_interval = self.randomizeIntervalCheckBox.isChecked()
+            mistake_percentage = int(self.mistakePercentageSpinBox.value())
         except ValueError:
-            QMessageBox.critical(self, "Error", "Invalid input for delay, interval, or chars per stroke.")
+            QMessageBox.critical(self, "Error", "Invalid input for delay, interval, chars per stroke, or mistake percentage.")
             return
 
         self.startButton.setEnabled(False)
         self.stopButton.setEnabled(True)
         if delay > 0:
-            QTimer.singleShot(delay * 1000, lambda: self.initiate_typing(text, interval, type_enter, chars_per_stroke, randomize_interval))
+            QTimer.singleShot(delay * 1000, lambda: self.initiate_typing(text, interval, type_enter, chars_per_stroke, randomize_interval, mistake_percentage))
         else:
-            self.initiate_typing(text, interval, type_enter, chars_per_stroke, randomize_interval)
+            self.initiate_typing(text, interval, type_enter, chars_per_stroke, randomize_interval, mistake_percentage)
 
-    def initiate_typing(self, text, interval, type_enter, chars_per_stroke, randomize_interval):
-        self.thread = TypingThread(text, interval, type_enter, chars_per_stroke, randomize_interval)
+    def initiate_typing(self, text, interval, type_enter, chars_per_stroke, randomize_interval, mistake_percentage):
+        self.thread = TypingThread(text, interval, type_enter, chars_per_stroke, randomize_interval, mistake_percentage)
         self.thread.progress.connect(self.update_progress)
         self.thread.finished.connect(self.typing_finished)
         self.progressBar.setValue(0)

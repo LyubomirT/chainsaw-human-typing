@@ -32,6 +32,10 @@
         {
             "component": "randomizeIntervalCheckBox",
             "text": "Intervalle Aléatoire"
+        },
+        {
+            "component": "mistakePercentageLabel",
+            "text": "Pourcentage d'erreur :"
         }
     ]
 }

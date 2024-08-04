@@ -20,9 +20,9 @@ class Ui_MainWindow(object):
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(600, 500)
-        MainWindow.setMinimumSize(QtCore.QSize(600, 500))
-        MainWindow.setMaximumSize(QtCore.QSize(600, 500))
+        MainWindow.resize(600, 600)
+        MainWindow.setMinimumSize(QtCore.QSize(600, 600))
+        MainWindow.setMaximumSize(QtCore.QSize(600, 600))
         MainWindow.setWindowIcon(QtGui.QIcon("logo.png"))
         if sys.platform == "win32" and hasattr(ctypes.windll, "shell32"):
             ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID("Chainsaw Human Typing")
@@ -30,7 +30,7 @@ class Ui_MainWindow(object):
         self.centralwidget.setObjectName("centralwidget")
         
         self.horizontalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.horizontalLayoutWidget.setGeometry(QtCore.QRect(20, 20, 561, 461))
+        self.horizontalLayoutWidget.setGeometry(QtCore.QRect(20, 20, 560, 560))
         self.horizontalLayoutWidget.setObjectName("horizontalLayoutWidget")
         
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget)
@@ -73,6 +73,15 @@ class Ui_MainWindow(object):
         self.charPerStrokeSpinBox.setRange(1, 50)
         self.charPerStrokeSpinBox.setObjectName("charPerStrokeSpinBox")
         self.settingsLayout.addWidget(self.charPerStrokeSpinBox)
+
+        self.mistakePercentageLabel = QtWidgets.QLabel(self.horizontalLayoutWidget)
+        self.mistakePercentageLabel.setObjectName("mistakePercentageLabel")
+        self.settingsLayout.addWidget(self.mistakePercentageLabel)
+
+        self.mistakePercentageSpinBox = QtWidgets.QSpinBox(self.horizontalLayoutWidget)
+        self.mistakePercentageSpinBox.setRange(0, 100)
+        self.mistakePercentageSpinBox.setObjectName("mistakePercentageSpinBox")
+        self.settingsLayout.addWidget(self.mistakePercentageSpinBox)
 
         self.randomizeIntervalCheckBox = QtWidgets.QCheckBox(self.horizontalLayoutWidget)
         self.randomizeIntervalCheckBox.setObjectName("randomizeIntervalCheckBox")
@@ -149,7 +158,6 @@ class Ui_MainWindow(object):
         with open("language.txt", "w", encoding="utf-8") as f:
             f.write(self.current_language)
         self.update_ui_text()
-
 
     def update_ui_text(self):
         translation = self.translations.get(self.current_language, self.translations["English"])

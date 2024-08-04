@@ -32,6 +32,10 @@
         {
             "component": "randomizeIntervalCheckBox",
             "text": "随机化间隔"
+        },
+        {
+            "component": "mistakePercentageLabel",
+            "text": "错误百分比:"
         }
     ]
 }
