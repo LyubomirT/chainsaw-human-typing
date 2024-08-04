@@ -21,6 +21,7 @@ class TypingThread(QThread):
         self.mistake_percentage = mistake_percentage
         self.running = True
         self.keyboard = Controller()
+        print(f"TypingThread initialized with randomize_interval: {self.randomize_interval}")  # Debug print
 
     def run(self):
         i = 0
@@ -35,9 +36,11 @@ class TypingThread(QThread):
                 i += self.chars_per_stroke
             
             if self.randomize_interval:
-                current_interval = self.interval * random.uniform(0.4, 1.8)
+                current_interval = self.interval * random.uniform(0.1, 3)
+                print(f"Randomized interval: {current_interval}")  # Debug print
             else:
                 current_interval = self.interval
+                print(f"Fixed interval: {current_interval}")  # Debug print
             
             time.sleep(current_interval)
             self.progress.emit(int(i / len(self.text) * 100))
@@ -96,6 +99,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         except ValueError:
             QMessageBox.critical(self, "Error", "Invalid input for delay, interval, chars per stroke, or mistake percentage.")
             return
+
+        print(f"Starting typing with randomize_interval: {randomize_interval}")  # Debug print
 
         self.startButton.setEnabled(False)
         self.stopButton.setEnabled(True)
