@@ -27,6 +27,7 @@ This project is licensed under the GPL-3.0 License - see the [LICENSE](LICENSE) 
 ## Translations 🎌
 
 - 中文/Chinese README  [README-ZHCN](https://github.com/LyubomirT/chainsaw-human-typing/readmes/README-Chinese.md) 
+- Norwegian README [README-NO]([https://](https://github.com/LyubomirT/chainsaw-human-typing/readmes/README-Norwegian.md))
 
 ## Acknowledgements 🙏
 
