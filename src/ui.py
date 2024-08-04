@@ -4,6 +4,11 @@ import json
 import os
 import sys
 
+class PlainTextEdit(QtWidgets.QTextEdit):
+    def insertFromMimeData(self, source):
+        if source.hasText():
+            self.insertPlainText(source.text())
+
 class Ui_MainWindow(object):
     def __init__(self):
         if os.path.exists("language.txt"):
@@ -32,8 +37,9 @@ class Ui_MainWindow(object):
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout.setObjectName("horizontalLayout")
         
-        self.textEdit = QtWidgets.QTextEdit(self.horizontalLayoutWidget)
+        self.textEdit = PlainTextEdit(self.horizontalLayoutWidget)
         self.textEdit.setObjectName("textEdit")
+        self.textEdit.setAcceptRichText(False)
         self.horizontalLayout.addWidget(self.textEdit)
         
         self.settingsLayout = QtWidgets.QVBoxLayout()
@@ -111,9 +117,6 @@ class Ui_MainWindow(object):
 
         self.load_theme_based_on_last_choice()
 
-        # set the current language of the dropdown to the saved language
-        self.languageComboBox.setCurrentText(self.current_language)
-
     def load_translations(self):
         self.translations = {}
         translations_dir = "translations"
@@ -124,6 +127,9 @@ class Ui_MainWindow(object):
                     self.translations[language_code] = json.load(f)
                     language_original = self.translations[language_code].get("original", "Unknown")
                 self.languageComboBox.addItem(language_code + " - " + language_original)
+                if language_code == self.current_language:
+                    self.current_language = language_code
+                    self.languageComboBox.setCurrentText(self.current_language + " - " + language_original)
     
     def load_theme_based_on_last_choice(self):
         if not os.path.exists("theme.txt"):
