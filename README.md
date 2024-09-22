@@ -30,6 +30,23 @@ It’s very **simple** to use! Input the text you want to simulate, then hit **"
 
 <div align="center">
 
+📝 **Capabilities** ⌨️
+
+Chainsaw Human Typing allows for several tweaks to be made about how the typing is done. Users can choose the:
+    <ul>
+    <li>Delay until typing starts</li>
+    <li>Interval</li>
+    <li>Chars per stroke</li>
+    <li>Mistake Percentage</li>
+    </ul>
+along with being able to randomize the interval and choose whether enter is typed all in a GUI. 
+Users are also able to create different presets that save their typing settings. Current preset settings allow for unlimited presets to be created and for presets to be renamed or deleted.
+
+
+---
+
+<div align="center">
+
 🏗 **Run from Source**
 
 </div>
