@@ -1,35 +1,99 @@
-# chainsaw-human-typing
+# 🎯 **Chainsaw Human Typing**
 
-Welcome to the chainsaw-human-typing repository! Chainsaw Human Typing is a tool that allows you to simulate human typing on a keyboard if you can't, or don't want to, paste directly. This is useful for simulating human typing in a video, for example.
+Welcome to the **Chainsaw Human Typing** repository! This tool simulates **human-like typing** on a keyboard when you can’t, or don’t want to, paste directly. It's especially useful for simulating human typing in a video!
 
-## Getting Started 🚀
+---
 
-Simply download one a binary from the [releases](https://github.com/LyubomirT/chainsaw-human-typing/releases) page and run it. You can also build it yourself by cloning the repository and running `python main.py`.
+<div align="center">
 
-## Usage 🛠
+💻 **Getting Started** 🚀
 
-It's ️quite easy to use, actually! Just type the text you want to simulate typing in the input field and press the "Start Typing" button. The text will be typed out in the input field below. You can see the progress in the progress bar.
+</div>
 
-## Run from Source 🏗
+Download one of the binaries from the [releases page](https://github.com/LyubomirT/chainsaw-human-typing/releases) or build it yourself by cloning the repository and running:
 
-To run the project from source, you need to have Python 3.6 or higher installed. You also must install the dependencies by running `pip install -r requirements.txt`. After that, move to the `src` directory and run `python main.py` to run the project.
+```bash
+python main.py
+```
 
-To build the project, you can use PyInstaller. `build.ps1` is a PowerShell script that builds the project using PyInstaller. You can run it by running `.\build.ps1`. The output will be in the `dist` folder, note that the script is configured to build a Windows executable and that you need to have PyInstaller installed.
+---
 
-## Contributing 🤝
+<div align="center">
 
-If you want to contribute to this project, feel free to fork it and submit a pull request. I'll be happy to review it! If you have any questions, feel free to open an issue. Please check the [CONTRIBUTING](CONTRIBUTING.md) file for more information.
+⚙️ **Usage** 🛠
 
-## License 📝
+</div>
 
-This project is licensed under the GPL-3.0 License - see the [LICENSE](LICENSE) file for details.
+It’s very **simple** to use! Input the text you want to simulate, then hit **"Start Typing"**. Your text will appear in the lower input field as it's typed out, with a **progress bar** to monitor the process.
 
-## Translations 🎌
+---
 
-- 中文/Chinese README  [README-ZHCN](https://github.com/LyubomirT/chainsaw-human-typing/readmes/README-Chinese.md) 
-- Norwegian README [README-NO]([https://](https://github.com/LyubomirT/chainsaw-human-typing/readmes/README-Norwegian.md))
+<div align="center">
 
-## Acknowledgements 🙏
+🏗 **Run from Source**
+
+</div>
+
+Ensure you have **Python 3.6+** installed. Install the dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+Navigate to the `src` folder and run:
+
+```bash
+python main.py
+```
+
+To **build** the project, use **PyInstaller**. The `build.ps1` script automates this for **Windows**:
+
+```bash
+.\build.ps1
+```
+
+The output will be in the `dist` folder.
+
+---
+
+<div align="center">
+
+🤝 **Contributing**
+
+</div>
+
+Feel free to fork this project and submit a **pull request**. I’d be more than happy to review your contributions. If you have any questions, open an **issue**!
+
+See the [CONTRIBUTING](CONTRIBUTING.md) file for more details.
+
+---
+
+<div align="center">
+
+📝 **License**
+
+</div>
+
+This project is licensed under **GPL-3.0**. See the [LICENSE](LICENSE) file for more information.
+
+---
+
+<div align="center">
+
+🎌 **Translations Available**
+
+</div>
+
+- 中文/Chinese README: [README-ZHCN](https://github.com/LyubomirT/chainsaw-human-typing/readmes/README-Chinese.md)  
+- Norwegian README: [README-NO](https://github.com/LyubomirT/chainsaw-human-typing/readmes/README-Norwegian.md)
+
+---
+
+<div align="center">
+
+🙏 **Acknowledgements**
+
+</div>
 
 - [PyQt5](https://pypi.org/project/PyQt5/)
 - [PyInstaller](https://pypi.org/project/pyinstaller/)
