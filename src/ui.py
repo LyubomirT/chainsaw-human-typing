@@ -20,9 +20,9 @@ class Ui_MainWindow(object):
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(600, 600)
-        MainWindow.setMinimumSize(QtCore.QSize(600, 600))
-        MainWindow.setMaximumSize(QtCore.QSize(600, 600))
+        MainWindow.resize(800, 600)  # Increased width to accommodate presets
+        MainWindow.setMinimumSize(QtCore.QSize(800, 700))
+        MainWindow.setMaximumSize(QtCore.QSize(800, 700))
         MainWindow.setWindowIcon(QtGui.QIcon("logo.png"))
         if sys.platform == "win32" and hasattr(ctypes.windll, "shell32"):
             ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID("Chainsaw Human Typing")
@@ -30,17 +30,21 @@ class Ui_MainWindow(object):
         self.centralwidget.setObjectName("centralwidget")
         
         self.horizontalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.horizontalLayoutWidget.setGeometry(QtCore.QRect(20, 20, 560, 560))
+        self.horizontalLayoutWidget.setGeometry(QtCore.QRect(10, 10, 781, 681))
         self.horizontalLayoutWidget.setObjectName("horizontalLayoutWidget")
         
-        self.horizontalLayout = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget)
-        self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
-        self.horizontalLayout.setObjectName("horizontalLayout")
+        self.mainLayout = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget)
+        self.mainLayout.setContentsMargins(0, 0, 0, 0)
+        self.mainLayout.setObjectName("mainLayout")
+        
+        # Left Side Layout (TextEdit and Settings)
+        self.leftLayout = QtWidgets.QVBoxLayout()
+        self.leftLayout.setObjectName("leftLayout")
         
         self.textEdit = PlainTextEdit(self.horizontalLayoutWidget)
         self.textEdit.setObjectName("textEdit")
         self.textEdit.setAcceptRichText(False)
-        self.horizontalLayout.addWidget(self.textEdit)
+        self.leftLayout.addWidget(self.textEdit)
         
         self.settingsLayout = QtWidgets.QVBoxLayout()
         self.settingsLayout.setObjectName("settingsLayout")
@@ -115,7 +119,30 @@ class Ui_MainWindow(object):
         self.lightModeCheckBox.setChecked(True)
         self.settingsLayout.addWidget(self.lightModeCheckBox)
         
-        self.horizontalLayout.addLayout(self.settingsLayout)
+        self.leftLayout.addLayout(self.settingsLayout)
+        self.mainLayout.addLayout(self.leftLayout, 3)
+        
+        # Right Side Layout (Presets)
+        self.presetsLayout = QtWidgets.QVBoxLayout()
+        self.presetsLayout.setObjectName("presetsLayout")
+        
+        self.savePresetButton = QtWidgets.QPushButton(self.horizontalLayoutWidget)
+        self.savePresetButton.setObjectName("savePresetButton")
+        self.presetsLayout.addWidget(self.savePresetButton)
+        
+        self.presetsList = QtWidgets.QListWidget(self.horizontalLayoutWidget)
+        self.presetsList.setObjectName("presetsList")
+        self.presetsLayout.addWidget(self.presetsList)
+        
+        self.renamePresetButton = QtWidgets.QPushButton(self.horizontalLayoutWidget)
+        self.renamePresetButton.setObjectName("renamePresetButton")
+        self.presetsLayout.addWidget(self.renamePresetButton)
+        
+        self.deletePresetButton = QtWidgets.QPushButton(self.horizontalLayoutWidget)
+        self.deletePresetButton.setObjectName("deletePresetButton")
+        self.presetsLayout.addWidget(self.deletePresetButton)
+        
+        self.mainLayout.addLayout(self.presetsLayout, 1)
         
         MainWindow.setCentralWidget(self.centralwidget)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -129,6 +156,8 @@ class Ui_MainWindow(object):
     def load_translations(self):
         self.translations = {}
         translations_dir = "translations"
+        if not os.path.exists(translations_dir):
+            os.makedirs(translations_dir)
         for filename in os.listdir(translations_dir):
             if filename.endswith(".json"):
                 language_code = filename[:-5]  # Remove .json extension
@@ -160,8 +189,10 @@ class Ui_MainWindow(object):
         self.update_ui_text()
 
     def update_ui_text(self):
-        translation = self.translations.get(self.current_language, self.translations["English"])
-        for item in translation["MainWindow"]:
+        translation = self.translations.get(self.current_language, self.translations.get("English", {}))
+        if not translation:
+            return
+        for item in translation.get("MainWindow", []):
             component = getattr(self, item["component"], None)
             if component:
                 component.setText(item["text"])

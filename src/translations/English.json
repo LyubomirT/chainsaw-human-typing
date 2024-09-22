@@ -36,6 +36,18 @@
         {
             "component": "mistakePercentageLabel",
             "text": "Mistake Percentage:"
+        },
+        {
+            "component": "savePresetButton",
+            "text": "Save Preset"
+        },
+        {
+            "component": "renamePresetButton",
+            "text": "Rename Preset"
+        },
+        {
+            "component": "deletePresetButton",
+            "text": "Delete Preset"
         }
     ]
 }

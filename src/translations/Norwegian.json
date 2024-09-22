@@ -19,7 +19,7 @@
         },
         {
             "component": "startButton",
-            "text": "Begynn Å Skrive "
+            "text": "Begynn Å Skrive"
         },
         {
             "component": "stopButton",
@@ -36,6 +36,18 @@
         {
             "component": "mistakePercentageLabel",
             "text": "Feilprosent:"
+        },
+        {
+            "component": "savePresetButton",
+            "text": "Lagre forhåndsinnstilling"
+        },
+        {
+            "component": "renamePresetButton",
+            "text": "Gi nytt navn på forhåndsinnstilling"
+        },
+        {
+            "component": "deletePresetButton",
+            "text": "Slett forhåndsinnstilling"
         }
     ]
 }

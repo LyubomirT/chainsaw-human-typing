@@ -36,6 +36,18 @@
         {
             "component": "mistakePercentageLabel",
             "text": "Pourcentage d'erreur :"
+        },
+        {
+            "component": "savePresetButton",
+            "text": "Enregistrer le préréglage"
+        },
+        {
+            "component": "renamePresetButton",
+            "text": "Renommer le préréglage"
+        },
+        {
+            "component": "deletePresetButton",
+            "text": "Supprimer le préréglage"
         }
     ]
 }

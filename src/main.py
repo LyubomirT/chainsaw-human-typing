@@ -2,8 +2,11 @@ import sys
 import time
 import random
 import string
-from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox
+import json
+import os
+from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox, QListWidgetItem
 from PyQt5.QtCore import QTimer, Qt, QThread, pyqtSignal
+from PyQt5.QtWidgets import QInputDialog
 from ui import Ui_MainWindow
 from pynput.keyboard import Controller, Key
 
@@ -85,7 +88,17 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.stopButton.clicked.connect(self.stop_typing)
         self.languageComboBox.currentTextChanged.connect(self.change_language)
         self.lightModeCheckBox.toggled.connect(self.toggleTheme)
+        
+        # Presets Buttons
+        self.savePresetButton.clicked.connect(self.save_preset)
+        self.renamePresetButton.clicked.connect(self.rename_preset)
+        self.deletePresetButton.clicked.connect(self.delete_preset)
+        self.presetsList.itemDoubleClicked.connect(self.load_preset)
+
         self.thread = None
+        self.presets = {}
+        self.presets_file = "presets.json"
+        self.load_presets()
 
     def start_typing(self):
         text = self.textEdit.toPlainText()
@@ -129,7 +142,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.thread.wait()
             self.thread = None
         self.typing_finished()
-    
+
     def toggleTheme(self):
         if self.lightModeCheckBox.isChecked():
             self.setStyleSheet(open("style.css").read())
@@ -140,10 +153,117 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def save_theme_based_on_last_choice(self):
         with open("theme.txt", "w", encoding="utf-8") as f:
             f.write("light" if self.lightModeCheckBox.isChecked() else "dark")
-            
+    
+    # Presets Methods
+    def load_presets(self):
+        if os.path.exists(self.presets_file):
+            try:
+                with open(self.presets_file, "r", encoding="utf-8") as f:
+                    self.presets = json.load(f)
+                for preset_name in self.presets:
+                    self.presetsList.addItem(preset_name)
+            except Exception as e:
+                QMessageBox.critical(self, "Error", f"Failed to load presets: {e}")
+        else:
+            self.presets = {}
+
+    def save_presets_to_file(self):
+        try:
+            with open(self.presets_file, "w", encoding="utf-8") as f:
+                json.dump(self.presets, f, indent=4)
+        except Exception as e:
+            QMessageBox.critical(self, "Error", f"Failed to save presets: {e}")
+
+    def save_preset(self):
+        preset_name, ok = self.get_text_input("Save Preset", "Enter a name for the preset:")
+        if ok and preset_name:
+            if preset_name in self.presets:
+                QMessageBox.warning(self, "Warning", "A preset with this name already exists.")
+                return
+            self.presets[preset_name] = self.current_settings()
+            self.presetsList.addItem(preset_name)
+            self.save_presets_to_file()
+            QMessageBox.information(self, "Success", f"Preset '{preset_name}' saved successfully.")
+
+    def rename_preset(self):
+        selected_item = self.presetsList.currentItem()
+        if not selected_item:
+            QMessageBox.warning(self, "Warning", "Please select a preset to rename.")
+            return
+        old_name = selected_item.text()
+        new_name, ok = self.get_text_input("Rename Preset", "Enter a new name for the preset:", old_name)
+        if ok and new_name:
+            if new_name in self.presets:
+                QMessageBox.warning(self, "Warning", "A preset with this name already exists.")
+                return
+            self.presets[new_name] = self.presets.pop(old_name)
+            selected_item.setText(new_name)
+            self.save_presets_to_file()
+            QMessageBox.information(self, "Success", f"Preset renamed to '{new_name}' successfully.")
+
+    def delete_preset(self):
+        selected_item = self.presetsList.currentItem()
+        if not selected_item:
+            QMessageBox.warning(self, "Warning", "Please select a preset to delete.")
+            return
+        preset_name = selected_item.text()
+        confirm = QMessageBox.question(self, "Confirm Delete", f"Are you sure you want to delete preset '{preset_name}'?", QMessageBox.Yes | QMessageBox.No)
+        if confirm == QMessageBox.Yes:
+            self.presets.pop(preset_name, None)
+            self.presetsList.takeItem(self.presetsList.row(selected_item))
+            self.save_presets_to_file()
+            QMessageBox.information(self, "Success", f"Preset '{preset_name}' deleted successfully.")
+
+    def load_preset(self, item):
+        preset_name = item.text()
+        settings = self.presets.get(preset_name)
+        if settings:
+            self.apply_settings(settings)
+            QMessageBox.information(self, "Preset Loaded", f"Preset '{preset_name}' has been loaded.")
+        else:
+            QMessageBox.warning(self, "Warning", f"Preset '{preset_name}' not found.")
+
+    def current_settings(self):
+        return {
+            "delay": self.delaySpinBox.value(),
+            "interval": self.intervalSpinBox.value(),
+            "type_enter": self.enterCheckBox.isChecked(),
+            "chars_per_stroke": self.charPerStrokeSpinBox.value(),
+            "randomize_interval": self.randomizeIntervalCheckBox.isChecked(),
+            "mistake_percentage": self.mistakePercentageSpinBox.value(),
+            "light_mode": self.lightModeCheckBox.isChecked(),
+            "language": self.current_language
+        }
+
+    def apply_settings(self, settings):
+        self.delaySpinBox.setValue(settings.get("delay", 0))
+        self.intervalSpinBox.setValue(settings.get("interval", 0.0))
+        self.enterCheckBox.setChecked(settings.get("type_enter", False))
+        self.charPerStrokeSpinBox.setValue(settings.get("chars_per_stroke", 1))
+        self.randomizeIntervalCheckBox.setChecked(settings.get("randomize_interval", False))
+        self.mistakePercentageSpinBox.setValue(settings.get("mistake_percentage", 0))
+        self.lightModeCheckBox.setChecked(settings.get("light_mode", True))
+        self.toggleTheme()
+        language = settings.get("language", "English")
+        index = self.languageComboBox.findText(language + " - " + self.translations.get(language, {}).get("original", "Unknown"))
+        if index != -1:
+            self.languageComboBox.setCurrentIndex(index)
+
+    def get_text_input(self, title, label, default_text=""):
+        text, ok = QInputDialog.getText(self, title, label, text=default_text)
+        return text, ok
+
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    app.setStyleSheet(open("style.css").read())
+    if os.path.exists("theme.txt"):
+        with open("theme.txt", "r", encoding="utf-8") as f:
+            theme = f.read()
+        if theme == "light":
+            app.setStyleSheet(open("style.css").read())
+        else:
+            app.setStyleSheet(open("darkmode.css").read())
+    else:
+        app.setStyleSheet(open("style.css").read())
     window = MainWindow()
     window.show()
     sys.exit(app.exec_())

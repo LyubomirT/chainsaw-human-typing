@@ -70,3 +70,39 @@ QComboBox {
     padding: 5px;
     color: #ffffff;
 }
+
+/* Presets Section */
+#presetsGroupBox {
+    background-color: #2b2b2b;
+    border: 1px solid #555555;
+    border-radius: 5px;
+    padding: 10px;
+    color: #ffffff;
+}
+
+QListWidget#presetsList {
+    background-color: #1e1e1e;
+    border: 1px solid #555555;
+    color: #ffffff;
+    padding: 5px;
+    selection-background-color: #555555;
+}
+
+QPushButton#savePresetButton, QPushButton#renamePresetButton, QPushButton#deletePresetButton {
+    font-size: 9pt;
+    padding: 8px;
+    background-color: #666666;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    font: bold;
+    margin-top: 5px;
+}
+
+QPushButton#savePresetButton:hover, QPushButton#renamePresetButton:hover, QPushButton#deletePresetButton:hover {
+    background-color: #444444;
+}
+
+QPushButton#savePresetButton:disabled, QPushButton#renamePresetButton:disabled, QPushButton#deletePresetButton:disabled {
+    background-color: #555555;
+}

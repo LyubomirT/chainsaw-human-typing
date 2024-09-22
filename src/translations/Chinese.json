@@ -26,7 +26,7 @@
             "text": "停止打字"
         },
         {
-            "component": "lightModeCheckbox",
+            "component": "lightModeCheckBox",
             "text": "轻模式"
         },
         {
@@ -36,6 +36,18 @@
         {
             "component": "mistakePercentageLabel",
             "text": "错误百分比:"
+        },
+        {
+            "component": "savePresetButton",
+            "text": "保存预设"
+        },
+        {
+            "component": "renamePresetButton",
+            "text": "重命名预设"
+        },
+        {
+            "component": "deletePresetButton",
+            "text": "删除预设"
         }
     ]
 }
