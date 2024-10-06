@@ -84,8 +84,9 @@ This project is licensed under **GPL-3.0**. See the [LICENSE](LICENSE) file for 
 
 </div>
 
-- 中文/Chinese README: [README-ZHCN](https://github.com/LyubomirT/chainsaw-human-typing/readmes/README-Chinese.md)  
-- Norwegian README: [README-NO](https://github.com/LyubomirT/chainsaw-human-typing/readmes/README-Norwegian.md)
+- 中文/Chinese README: [README-ZHCN](https://github.com/LyubomirT/chainsaw-human-typing/blob/main/readmes/README-Chinese.md)
+- Norwegian README: [README-NO](https://github.com/LyubomirT/chainsaw-human-typing/blob/main/readmes/README-Norwegian.md)
+- Turkish README: [README-TR](https://github.com/LyubomirT/chainsaw-human-typing/blob/main/readmes/README-Turkish.md)
 
 ---
 

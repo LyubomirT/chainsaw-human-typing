@@ -1,0 +1,53 @@
+{
+    "original": "Türkçe",
+    "MainWindow": [
+        {
+            "component": "delayLabel",
+            "text": "Gecikme (sn):"
+        },
+        {
+            "component": "intervalLabel",
+            "text": "Aralık (sn):"
+        },
+        {
+            "component": "charPerStrokeLabel",
+            "text": "Vuruş başına karakter:"
+        },
+        {
+            "component": "enterCheckBox",
+            "text": "Enter Tuşuna Bas"
+        },
+        {
+            "component": "startButton",
+            "text": "Yazmaya Başla"
+        },
+        {
+            "component": "stopButton",
+            "text": "Yazmayı Durdur"
+        },
+        {
+            "component": "lightModeCheckBox",
+            "text": "Aydınlık Mod"
+        },
+        {
+            "component": "randomizeIntervalCheckBox",
+            "text": "Aralığı Rastgele Yap"
+        },
+        {
+            "component": "mistakePercentageLabel",
+            "text": "Hata Yüzdesi:"
+        },
+        {
+            "component": "savePresetButton",
+            "text": "Ön Ayarı Kaydet"
+        },
+        {
+            "component": "renamePresetButton",
+            "text": "Ön Ayarı Yeniden Adlandır"
+        },
+        {
+            "component": "deletePresetButton",
+            "text": "Ön Ayarı Sil"
+        }
+    ]
+}
