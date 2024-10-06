@@ -3,11 +3,11 @@
     "MainWindow": [
         {
             "component": "delayLabel",
-            "text": "Gecikme (ler):"
+            "text": "Gecikme (sn):"
         },
         {
             "component": "intervalLabel",
-            "text": "Aralık (lar):"
+            "text": "Aralık (sn):"
         },
         {
             "component": "charPerStrokeLabel",
