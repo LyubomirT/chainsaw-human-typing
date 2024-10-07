@@ -10,11 +10,20 @@ Welcome to the **Chainsaw Human Typing** repository! This tool simulates **human
 
 </div>
 
+| Supported OS | Build Status |
+|--------------|--------------|
+| Windows      | Since 1.0.0  |
+| Linux        | Since 1.5.0  |
+| MacOS        | Not yet*     |
+| FreeBSD      | Not yet      |
+
 Download one of the binaries from the [releases page](https://github.com/LyubomirT/chainsaw-human-typing/releases) or build it yourself by cloning the repository and running:
 
 ```bash
 python main.py
 ```
+
+*The app technically should work on MacOS, but we don't have any pre-built binaries for it yet.
 
 ---
 
