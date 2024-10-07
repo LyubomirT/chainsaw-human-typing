@@ -1,2 +1,3 @@
 pynput
 pyqt5
+evdev

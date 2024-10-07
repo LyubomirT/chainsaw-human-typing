@@ -8,7 +8,6 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox, QListWidgetI
 from PyQt5.QtCore import QTimer, Qt, QThread, pyqtSignal
 from PyQt5.QtWidgets import QInputDialog
 from ui import Ui_MainWindow
-from pynput.keyboard import Controller, Key
 
 class TypingThread(QThread):
     progress = pyqtSignal(int)
@@ -23,28 +22,43 @@ class TypingThread(QThread):
         self.randomize_interval = randomize_interval
         self.mistake_percentage = mistake_percentage
         self.running = True
-        self.keyboard = Controller()
-        print(f"TypingThread initialized with randomize_interval: {self.randomize_interval}")  # Debug print
+
+        # Detect if running under Wayland or Xorg
+        session_type = os.environ.get('XDG_SESSION_TYPE')
+        if session_type == 'wayland':
+            self.use_wayland = True
+            try:
+                from evdev import UInput, ecodes as e
+                self.e = e
+                self.ui = UInput()
+            except ImportError:
+                QMessageBox.critical(None, "Error", "The 'evdev' module is required for Wayland support. Please install it using 'pip install evdev'.")
+                self.stop()
+        else:
+            self.use_wayland = False
+            from pynput.keyboard import Controller, Key
+            self.keyboard = Controller()
+
+        print(f"TypingThread initialized with randomize_interval: {self.randomize_interval}, use_wayland: {self.use_wayland}")  # Debug print
 
     def run(self):
         i = 0
         while i < len(self.text) and self.running:
             if self.text[i] == '\n' and self.type_enter:
-                self.keyboard.press(Key.enter)
-                self.keyboard.release(Key.enter)
+                self.press_enter()
                 i += 1
             else:
                 chunk = self.text[i:i + self.chars_per_stroke]
                 self.type_with_mistake(chunk)
                 i += self.chars_per_stroke
-            
+
             if self.randomize_interval:
                 current_interval = self.interval * random.uniform(0.1, 3)
                 print(f"Randomized interval: {current_interval}")  # Debug print
             else:
                 current_interval = self.interval
                 print(f"Fixed interval: {current_interval}")  # Debug print
-            
+
             time.sleep(current_interval)
             self.progress.emit(int(i / len(self.text) * 100))
         self.finished.emit()
@@ -54,26 +68,119 @@ class TypingThread(QThread):
             if random.random() < self.mistake_percentage / 100:
                 # Make a typo
                 wrong_char = random.choice(string.ascii_lowercase)
-                self.keyboard.type(wrong_char)
+                self.type_char(wrong_char)
                 time.sleep(self.interval * 2)  # Pause after typo
-                
+
                 # Type a few more characters
                 extra_chars = ''.join(random.choices(string.ascii_lowercase, k=random.randint(1, 3)))
-                self.keyboard.type(extra_chars)
+                for c in extra_chars:
+                    self.type_char(c)
                 time.sleep(self.interval * 3)  # Pause after extra chars
-                
+
                 # Backspace to correct the mistake
                 for _ in range(len(extra_chars) + 1):
-                    self.keyboard.press(Key.backspace)
-                    self.keyboard.release(Key.backspace)
+                    self.press_backspace()
                     time.sleep(self.interval * 0.5)
-                
+
                 # Type the correct character
-                self.keyboard.type(char)
+                self.type_char(char)
             else:
                 # Type normally
-                self.keyboard.type(char)
+                self.type_char(char)
             time.sleep(self.interval)
+
+    def type_char(self, char):
+        if self.use_wayland:
+            self.type_char_evdev(char)
+        else:
+            self.keyboard.type(char)
+
+    def press_backspace(self):
+        if self.use_wayland:
+            self.ui.write(self.e.EV_KEY, self.e.KEY_BACKSPACE, 1)
+            self.ui.write(self.e.EV_KEY, self.e.KEY_BACKSPACE, 0)
+            self.ui.syn()
+        else:
+            from pynput.keyboard import Key
+            self.keyboard.press(Key.backspace)
+            self.keyboard.release(Key.backspace)
+
+    def press_enter(self):
+        if self.use_wayland:
+            self.ui.write(self.e.EV_KEY, self.e.KEY_ENTER, 1)
+            self.ui.write(self.e.EV_KEY, self.e.KEY_ENTER, 0)
+            self.ui.syn()
+        else:
+            from pynput.keyboard import Key
+            self.keyboard.press(Key.enter)
+            self.keyboard.release(Key.enter)
+
+    def type_char_evdev(self, char):
+        keycode = self.char_to_keycode(char)
+        if keycode is None:
+            return
+
+        shift_needed = False
+        if char.isupper() or char in '~!@#$%^&*()_+{}|:"<>?':
+            shift_needed = True
+
+        if shift_needed:
+            self.ui.write(self.e.EV_KEY, self.e.KEY_LEFTSHIFT, 1)
+
+        self.ui.write(self.e.EV_KEY, keycode, 1)  # Key press
+        self.ui.write(self.e.EV_KEY, keycode, 0)  # Key release
+
+        if shift_needed:
+            self.ui.write(self.e.EV_KEY, self.e.KEY_LEFTSHIFT, 0)
+
+        self.ui.syn()
+
+    def char_to_keycode(self, char):
+        if len(char) != 1:
+            return None
+
+        if char.isalpha():
+            return getattr(self.e, 'KEY_' + char.upper(), None)
+        elif char.isdigit():
+            return getattr(self.e, 'KEY_' + char, None)
+        else:
+            keycode_map = {
+                ' ': self.e.KEY_SPACE,
+                '\n': self.e.KEY_ENTER,
+                ',': self.e.KEY_COMMA,
+                '.': self.e.KEY_DOT,
+                ';': self.e.KEY_SEMICOLON,
+                ':': self.e.KEY_SEMICOLON,
+                '/': self.e.KEY_SLASH,
+                '?': self.e.KEY_SLASH,
+                '\\': self.e.KEY_BACKSLASH,
+                '|': self.e.KEY_BACKSLASH,
+                '\'': self.e.KEY_APOSTROPHE,
+                '"': self.e.KEY_APOSTROPHE,
+                '-': self.e.KEY_MINUS,
+                '_': self.e.KEY_MINUS,
+                '=': self.e.KEY_EQUAL,
+                '+': self.e.KEY_EQUAL,
+                '[': self.e.KEY_LEFTBRACE,
+                '{': self.e.KEY_LEFTBRACE,
+                ']': self.e.KEY_RIGHTBRACE,
+                '}': self.e.KEY_RIGHTBRACE,
+                '(': self.e.KEY_9,
+                ')': self.e.KEY_0,
+                '!': self.e.KEY_1,
+                '@': self.e.KEY_2,
+                '#': self.e.KEY_3,
+                '$': self.e.KEY_4,
+                '%': self.e.KEY_5,
+                '^': self.e.KEY_6,
+                '&': self.e.KEY_7,
+                '*': self.e.KEY_8,
+                '<': self.e.KEY_COMMA,
+                '>': self.e.KEY_DOT,
+                '`': self.e.KEY_GRAVE,
+                '~': self.e.KEY_GRAVE,
+            }
+            return keycode_map.get(char)
 
     def stop(self):
         self.running = False
