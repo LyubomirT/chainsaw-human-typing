@@ -1,3 +1,6 @@
+> [!WARNING]
+> This has been dead for quite a while, mostly due to my studies. I may revisit the project in the future, but for now I'm focused on other projects and my studies.
+
 # 🎯 **Chainsaw Human Typing**
 
 Welcome to the **Chainsaw Human Typing** repository! This tool simulates **human-like typing** on a keyboard when you can’t, or don’t want to, paste directly. It's especially useful for simulating human typing in a video!
