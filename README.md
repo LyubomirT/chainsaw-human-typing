@@ -1,5 +1,5 @@
 > [!WARNING]
-> This has been dead for quite a while, mostly due to my studies. I may revisit the project in the future, but for now I'm focused on other projects and my studies.
+> This has been dead for quite a while, mostly due to my studies. I may revisit the project in the future, but for now, I'm focused on other personal projects and college.
 
 # 🎯 **Chainsaw Human Typing**
 
